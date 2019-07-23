@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing;
 
 namespace SpaceGame
 {
@@ -8,12 +7,16 @@ namespace SpaceGame
         static string[,] fieldDisplay = new string[24, 18];//[rows,columns]
         static void Main(string[] args)
         {
-
+           
 
             DisplaySetUp();
             DisplayOutput();
-
+            //Console.WriteLine("The current buffer height is {0} rows.",
+             //                   Console.BufferHeight);
+            //Console.WriteLine("The current buffer width is {0} columns.",
+              //                  Console.BufferWidth);
             
+
 
         }
 
