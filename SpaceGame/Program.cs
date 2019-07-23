@@ -6,7 +6,7 @@ namespace SpaceGame
     {
         static void Main(string[] args)
         {
-            Array[,] fieldDisplay = new Array[18,24];
+            Array[,] fieldDisplay = new Array[18,2];
 
         }
     }
