@@ -79,27 +79,24 @@ namespace SpaceGame
                 Console.WriteLine(userKey.Key.ToString());
                 userMove = userKey.Key.ToString();
 
-                if (userMove == "RightArrow")
+                switch (userMove)
                 {
-                    Console.WriteLine("User moved right");
-                }
-                else if (userMove == "LeftArrow")
-                {
-                    Console.WriteLine("User moved left");
-                }
-                else if (userMove == "Escape")
-                {
-                    Console.WriteLine("User Quit");
-                    truther = false;
-                }
-                else if (userMove == "SpaceBar")
-                {
-                    Console.WriteLine("User hit the SpaceBar");
-
-                }
-                else
-                {
-                    Console.WriteLine("Unrecognized button press");
+                    case "RightArrow":
+                        Console.WriteLine("User hit the right arrow");
+                        break;
+                    case "LeftArrow":
+                        Console.WriteLine("User hit the left arrow");
+                        break;
+                    case "SpaceBar":
+                        Console.WriteLine("User hit the SpaceBar");
+                        break;
+                    case "Escape":
+                        Console.WriteLine("User Quit");
+                        truther = false;
+                        break;
+                    default:
+                        Console.WriteLine("Unrecognized key press");
+                        break;
                 }
             }
             
