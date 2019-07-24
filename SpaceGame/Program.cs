@@ -5,20 +5,22 @@ namespace SpaceGame
     class Program
     {
         static string[,] fieldDisplay = new string[24, 18];//[rows,columns]
+        static ConsoleKeyInfo userKey;
+        static string userMove;
+        static bool truther = true;
         static void Main(string[] args)
         {
            
 
             DisplaySetUp();
             DisplayOutput();
+            UserControl();
+            
+            
+            //SpaceShip Ship = new SpaceShip();
+            //Ship.Spaceship();
 
-            SpaceShip Ship = new SpaceShip();
-            Ship.Spaceship();
-
-            //Console.WriteLine("The current buffer height is {0} rows.",
-            //                   Console.BufferHeight);
-            //Console.WriteLine("The current buffer width is {0} columns.",
-            //                  Console.BufferWidth);
+            
 
 
 
@@ -64,6 +66,43 @@ namespace SpaceGame
                 }
                 Console.WriteLine();
             }
+        }
+
+        public static void UserControl()
+        {
+            
+
+            while(truther)
+            {
+                userKey = Console.ReadKey();
+
+                Console.WriteLine(userKey.Key.ToString());
+                userMove = userKey.Key.ToString();
+
+                if (userMove == "RightArrow")
+                {
+                    Console.WriteLine("User moved right");
+                }
+                else if (userMove == "LeftArrow")
+                {
+                    Console.WriteLine("User moved left");
+                }
+                else if (userMove == "Escape")
+                {
+                    Console.WriteLine("User Quit");
+                    truther = false;
+                }
+                else if (userMove == "SpaceBar")
+                {
+                    Console.WriteLine("User hit the SpaceBar");
+
+                }
+                else
+                {
+                    Console.WriteLine("Unrecognized button press");
+                }
+            }
+            
         }
 
       
