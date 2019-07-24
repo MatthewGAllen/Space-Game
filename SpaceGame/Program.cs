@@ -11,14 +11,21 @@ namespace SpaceGame
 
             DisplaySetUp();
             DisplayOutput();
+
+            SpaceShip Ship = new SpaceShip();
+            Ship.Spaceship();
+
             //Console.WriteLine("The current buffer height is {0} rows.",
-             //                   Console.BufferHeight);
+            //                   Console.BufferHeight);
             //Console.WriteLine("The current buffer width is {0} columns.",
-              //                  Console.BufferWidth);
-            
+            //                  Console.BufferWidth);
+
 
 
         }
+
+        
+
 
         public static void DisplaySetUp()
         {
