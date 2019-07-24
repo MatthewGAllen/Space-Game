@@ -8,20 +8,23 @@ namespace SpaceGame
         static ConsoleKeyInfo userKey;
         static string userMove;
         static bool truther = true;
+        static int xAxis = 9;
         static void Main(string[] args)
         {
-           
 
-            DisplaySetUp();
-            DisplayOutput();
-            UserControl();
+            while (truther)
+            {
+                DisplaySetUp();
+                DisplayOutput();
+                UserControl();
+            }
             
             
             //SpaceShip Ship = new SpaceShip();
             //Ship.Spaceship();
 
             
-
+            
 
 
         }
@@ -31,6 +34,7 @@ namespace SpaceGame
 
         public static void DisplaySetUp()
         {
+
             for (int i = 1; i < 17; i++)
             {
                 fieldDisplay[0, i ] = "^";
@@ -52,6 +56,9 @@ namespace SpaceGame
               
                 fieldDisplay[j, 17] = "|";
             }
+
+            fieldDisplay[23, xAxis] = "V";
+            
         }
 
         public static void DisplayOutput()
@@ -60,12 +67,13 @@ namespace SpaceGame
             int colLeng = fieldDisplay.GetLength(0);
             for (int j = 0; j < colLeng; j++)
             {
-                for ( int i = 0; i < rowLeng; i++)
+                for (int i = 0; i < rowLeng; i++)
                 {
                     Console.Write(string.Format("{0} ", fieldDisplay[j, i]));
                 }
                 Console.WriteLine();
             }
+            
         }
 
         public static void UserControl()
@@ -76,16 +84,18 @@ namespace SpaceGame
             {
                 userKey = Console.ReadKey();
 
-                Console.WriteLine(userKey.Key.ToString());
+                //Console.WriteLine(userKey.Key.ToString());
                 userMove = userKey.Key.ToString();
 
                 switch (userMove)
                 {
                     case "RightArrow":
-                        Console.WriteLine("User hit the right arrow");
+                        
+                        xAxis =+ 1;
                         break;
                     case "LeftArrow":
-                        Console.WriteLine("User hit the left arrow");
+                        
+                        --xAxis;
                         break;
                     case "SpaceBar":
                         Console.WriteLine("User hit the SpaceBar");
