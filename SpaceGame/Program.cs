@@ -1,117 +1,169 @@
 ﻿using System;
 
+
 namespace SpaceGame
 {
     class Program
     {
-        static string[,] fieldDisplay = new string[24, 18];//[rows,columns]
-        static ConsoleKeyInfo userKey;
-        static string userMove;
+        
+        
         static bool truther = true;
-        static int xAxis = 9;
+        //^^^^^^^^^^^^^^^^^^^^^^^^Game Loop variable
+
+        static int xPos = 35;
+        static int yPos = 39;
+        //^^^^^^User position on screen 
+
+        static Random rand = new Random();
+        //^^^^^Used to create random x position for the enemies
+
+        static int xPosEn;
+        static int yPosEn = 2;
+
+        static int bullXpos;
+        static int bullYpos;
         static void Main(string[] args)
         {
+            //Sets the default console window height and width
+            Console.WindowHeight = 42;
+            Console.WindowWidth = 75;
 
-            while (truther)
+            //game loop for all methods needed in this program
+            do
             {
-                DisplaySetUp();
-                DisplayOutput();
-                UserControl();
-            }
-            
-            
-            //SpaceShip Ship = new SpaceShip();
-            //Ship.Spaceship();
 
-            
-            
+                xPosEn = rand.Next(69);  //gets random number for position of the enemy
+                DisplaySetUp(); // sets up the screen for the player
+                EnemyMaker();
+                UserControl(); // gets the users input and prints the users character and the enemy
+                Shooter();
+
+            } while (truther);
+
 
 
         }
-
-        
-
 
         public static void DisplaySetUp()
         {
+            Console.SetCursorPosition(xPos, yPos);
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.Write("^");
 
-            for (int i = 1; i < 17; i++)
+            for (int i = 1; i < 41; i++)
             {
-                fieldDisplay[0, i ] = "^";
-                
-
-            }
-            for (int i = 1; i < 24; i++)
-            {
-                for (int j = 1; j < 18; j++)
-                {
-                    fieldDisplay[i, j] = " ";
-                }
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.SetCursorPosition(1, i);
+                Console.Write("|");
+                Console.SetCursorPosition(70, i);
+                Console.Write("|");
             }
 
-
-            for (int j = 0; j < 24; j++)
+            for (int i = 1; i < 71; i++)
             {
-                fieldDisplay[j, 0] = "|";
-              
-                fieldDisplay[j, 17] = "|";
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.SetCursorPosition(i, 1);
+                Console.Write("*");
+                Console.SetCursorPosition(i, 40);
+                Console.Write("*");
+
             }
 
-            fieldDisplay[23, xAxis] = "V";
-            
         }
 
-        public static void DisplayOutput()
+        public static void EnemyMaker()
         {
-            int rowLeng = fieldDisplay.GetLength(1);
-            int colLeng = fieldDisplay.GetLength(0);
-            for (int j = 0; j < colLeng; j++)
-            {
-                for (int i = 0; i < rowLeng; i++)
-                {
-                    Console.Write(string.Format("{0} ", fieldDisplay[j, i]));
-                }
-                Console.WriteLine();
-            }
-            
+
+            Console.SetCursorPosition(xPosEn, yPosEn);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("V");
+
+
         }
 
         public static void UserControl()
         {
-            
-
-            while(truther)
+            do
             {
-                userKey = Console.ReadKey();
+                Boundries(); // sets the boundries for the user and checks if the enemy made it to the bottom
 
-                //Console.WriteLine(userKey.Key.ToString());
-                userMove = userKey.Key.ToString();
-
-                switch (userMove)
+                ConsoleKey command = Console.ReadKey().Key;
+                switch (command)
                 {
-                    case "RightArrow":
+                    case ConsoleKey.LeftArrow:
+                        Console.SetCursorPosition(xPos, yPos);
+                        Console.Write(" ");
+                        xPos--;
+                        Console.SetCursorPosition(xPosEn, yPosEn);
+                        Console.Write(" ");
+                        yPosEn++;
+                        break;
+                    case ConsoleKey.RightArrow:
+                        Console.SetCursorPosition(xPos, yPos);
+                        Console.Write(" ");
+                        xPos++;
+                        Console.SetCursorPosition(xPosEn, yPosEn);
+                        Console.Write(" ");
+                        yPosEn++;
+                        break;
+                    case ConsoleKey.Spacebar:
                         
-                        xAxis =+ 1;
                         break;
-                    case "LeftArrow":
-                        
-                        --xAxis;
-                        break;
-                    case "SpaceBar":
-                        Console.WriteLine("User hit the SpaceBar");
-                        break;
-                    case "Escape":
-                        Console.WriteLine("User Quit");
+                    case ConsoleKey.Escape:
                         truther = false;
                         break;
-                    default:
-                        Console.WriteLine("Unrecognized key press");
-                        break;
                 }
+
+                EnemyMaker();
+
+                
+
+                Console.SetCursorPosition(xPos, yPos);
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("^");
+
+                Console.SetCursorPosition(bullXpos, bullYpos);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("^");
+
+            } while (truther);
+
+        }
+
+        public static void Boundries()
+        {
+            if (yPosEn == 39)
+            {
+                yPosEn--;
             }
+
+            if (xPos == 2)
+            {
+                Console.SetCursorPosition(xPos, yPos);
+                Console.Write(" ");
+                xPos++;
+            }
+            else if (xPos == 69)
+            {
+                Console.SetCursorPosition(xPos, yPos);
+                Console.Write(" ");
+                xPos--;
+            }
+
+            Console.SetCursorPosition(xPos, yPos);
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("^");
+        }
+
+        public static void Shooter()
+        {
+            
+            Console.SetCursorPosition(bullXpos, bullYpos);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("^" + "\n" + "|");
+            
             
         }
 
-      
     }
 }
