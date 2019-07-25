@@ -24,6 +24,7 @@ namespace SpaceGame
         static int bullYpos = 38;   // bullets starting y position
 
         static int enemyKills = 0;
+        static int lifeCount = 5;
         static void Main(string[] args)
         {
             //Sets the default console window height and width
@@ -94,14 +95,32 @@ namespace SpaceGame
                 yPosEn = 2;
                 xPosEn = rand.Next(69);
                 enemyKills++;
+                Console.SetCursorPosition(30, 42);
+                Console.Write($"Enemies killed: {enemyKills}");
             }
         }
+
+        public static void Lives()
+        {
+            if (yPosEn == 39)
+            {
+                Console.SetCursorPosition(xPosEn, yPosEn);
+                Console.Write(" ");
+                yPosEn = 2;
+                xPosEn = rand.Next(69);
+                lifeCount--;
+                Console.SetCursorPosition(30, 48);
+                Console.Write($"Lives left: {lifeCount}");
+            }
+        }
+
         public static void UserControl()
         {
             do
             {
                 Boundries(); // sets the boundries for the user and checks if the enemy made it to the bottom
                 KillCount();
+                Lives();
                 ConsoleKey command = Console.ReadKey().Key;//waits for the user to press a key and assigns that value to the command variable
                 switch (command)
                 {
@@ -158,7 +177,7 @@ namespace SpaceGame
                     {
                         //sets cursor to the bullets pos and replaces the hole in the ceiling with an *. sets shoot active to false
                         // and resets the bullets y pos to the bottom of the screen
-                        Console.Write("User hit ceiling");
+                        //Console.Write("User hit ceiling");
                         Console.SetCursorPosition(bullXpos, bullYpos);
                         Console.Write("*");
                         shootActive = false;
@@ -180,16 +199,16 @@ namespace SpaceGame
                         //TO POPULATE A NEW ENEMY
             }
 
-            if (xPos == 2)//checks to see if the user has gone to far left
+            if (xPos == 1)//checks to see if the user has gone to far left
             {
                 Console.SetCursorPosition(xPos, yPos);
-                Console.Write(" ");
+                Console.Write("|");
                 xPos++;//resets the user back to the right by one so it looks like he never actually went into the wall
             }
-            else if (xPos == 69)// checks to see if the user has gone to far right
+            else if (xPos == 70)// checks to see if the user has gone to far right
             {
                 Console.SetCursorPosition(xPos, yPos);
-                Console.Write(" ");
+                Console.Write("|");
                 xPos--;
             }
             //prints the user character again since it hit the wall and was erased
