@@ -17,7 +17,7 @@ namespace SpaceGame
         static Random rand = new Random();
         //^^^^^Used to create random x position for the enemies
 
-        static int xPosEn;  // Enemys sarting x position. instantiated by rand in the main method
+        static int xPosEn = 1;  // Enemys sarting x position. instantiated by rand in the main method
         static int yPosEn = 2;  // Enemys starting y position
 
         static int bullXpos;    // bullets x starting position. Instantiated by the users x Pos at the time of spacebar pushed
@@ -81,7 +81,7 @@ namespace SpaceGame
             Console.SetCursorPosition(xPosEn, yPosEn);
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("V");
-
+            Lives();
 
         }
 
@@ -120,7 +120,7 @@ namespace SpaceGame
             {
                 Boundries(); // sets the boundries for the user and checks if the enemy made it to the bottom
                 KillCount();
-                Lives();
+                //Lives();
                 ConsoleKey command = Console.ReadKey().Key;//waits for the user to press a key and assigns that value to the command variable
                 switch (command)
                 {
@@ -211,7 +211,27 @@ namespace SpaceGame
                 Console.Write("|");
                 xPos--;
             }
+
+            //Sets the new enemy up in case the random x pos is outside the bounds of the pipes 
+            if (xPosEn <= 1)
+            {
+                Console.SetCursorPosition(xPosEn, yPosEn);
+                Console.Write(" ");
+                xPosEn = rand.Next(69);
+                Console.SetCursorPosition(xPosEn, yPosEn);
+                Console.Write("V");
+            }
+            else if (xPosEn >= 70)
+            {
+                Console.SetCursorPosition(xPosEn, yPosEn);
+                Console.Write(" ");
+                xPosEn = rand.Next(69);
+                Console.SetCursorPosition(xPosEn, yPosEn);
+                Console.Write("V");
+            }
             //prints the user character again since it hit the wall and was erased
+
+            
             Console.SetCursorPosition(xPos, yPos);
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("^");
