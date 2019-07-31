@@ -28,8 +28,8 @@ namespace SpaceGame
         static void Main(string[] args)
         {
             //Sets the default console window height and width
-            Console.WindowHeight = 42;
-            Console.WindowWidth = 75;
+           // Console.WindowHeight = 42;
+           // Console.WindowWidth = 75;
             
             //game loop for all methods needed in this program
             do
